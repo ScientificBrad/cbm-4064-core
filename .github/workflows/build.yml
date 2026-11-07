@@ -1,0 +1,73 @@
+name: Build, Test & Verify
+
+on:
+  push:
+    branches:
+      - main
+      - 'improvement/**'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build, Verify ROM & Automated Tests
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Restore Dependencies
+        run: |
+          dotnet restore src/Commodore4064/Commodore4064.csproj
+          dotnet restore tests/Commodore4064.Tests/Commodore4064.Tests.csproj
+
+      - name: Build Emulator Core
+        run: dotnet build src/Commodore4064/Commodore4064.csproj -c Release --no-restore
+
+      - name: Run Automated Emulator Tests
+        run: dotnet test tests/Commodore4064.Tests/Commodore4064.Tests.csproj -c Release --verbosity normal
+
+      - name: Verify ROM Reconstruction (Independent 6502 Assembly)
+        run: python asm/build_rom.py --method assemble
+
+      - name: Verify ROM Reconstruction (Disassembly Extraction Reference)
+        run: python asm/build_rom.py --method extract
+
+      - name: Publish Self-Contained Windows x64 Executable
+        run: |
+          dotnet publish src/Commodore4064/Commodore4064.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o publish/win-x64
+
+      - name: Smoke Test Published Executable
+        run: |
+          .\publish\win-x64\Commodore4064.exe --test
+          .\publish\win-x64\Commodore4064.exe --exec "PRINT 2+2"
+
+      - name: Upload Release Executable Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Commodore4064-win-x64
+          path: publish/win-x64/Commodore4064.exe
+          if-no-files-found: error
+
+      - name: Upload Verified ROM Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-cbm4064-roms
+          path: |
+            roms/cbm4064_rebuilt.rom
+            roms/checksums.sha256
+          if-no-files-found: error
