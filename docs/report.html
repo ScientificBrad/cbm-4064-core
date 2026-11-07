@@ -241,11 +241,11 @@ This project achieved complete bit-for-bit reverse engineering, clean 6502 sourc
 
 <div class="grid-2">
   <div class="figure">
-    <img src="images/01_initial_boot.png" alt="Boot Banner">
+    <img src="images/01_clean_boot.png" alt="Boot Banner">
     <div class="figure-caption">Figure 1: Authentic Educator 64 startup banner and READY prompt executed on standalone core.</div>
   </div>
   <div class="figure">
-    <img src="images/02_basic_hello_world.png" alt="BASIC Loop">
+    <img src="images/02_clean_basic_hello_world.png" alt="BASIC Loop">
     <div class="figure-caption">Figure 2: Cycle-accurate Commodore BASIC V2.0 interactive execution and syntax checking.</div>
   </div>
 </div>
@@ -287,15 +287,9 @@ void FUN_e4c8(void) {
     JMP(0xEA87); // Resume standard keyboard scan (SCNKEY)
 }</div>
 
-<div class="grid-2">
-  <div class="figure">
-    <img src="images/03_border_fix.png" alt="Border Rendering">
-    <div class="figure-caption">Figure 3: In-place console CRT buffer with VIC-II border and scanline alignment.</div>
-  </div>
-  <div class="figure">
-    <img src="images/05_petscii_render.png" alt="PETSCII Rendering">
-    <div class="figure-caption">Figure 4: Direct screen RAM poke ($0400) rendering full PETSCII graphical character matrices.</div>
-  </div>
+<div class="figure">
+  <img src="images/03_clean_petscii_render.png" alt="PETSCII Rendering">
+  <div class="figure-caption">Figure 3: Direct screen RAM poke ($0400) rendering full PETSCII graphical character matrices with aligned borders.</div>
 </div>
 
 <div class="page-break"></div>
@@ -329,12 +323,12 @@ RUN</div>
 
 <div class="grid-2">
   <div class="figure">
-    <img src="images/08_matrix_run_start.png" alt="Matrix Rain Execution">
-    <div class="figure-caption">Figure 5: Level 1 POC initialization running in the standalone terminal emulator.</div>
+    <img src="images/04_clean_matrix_start.png" alt="Matrix Rain Execution">
+    <div class="figure-caption">Figure 4: Level 1 POC initialization running in the standalone terminal emulator.</div>
   </div>
   <div class="figure">
-    <img src="images/09_matrix_dense_petscii.jpg" alt="Dense Matrix Storm">
-    <div class="figure-caption">Figure 6: Live phosphor corruption with reverse-video highlight blocks and PETSCII glyphs.</div>
+    <img src="images/05_clean_matrix_dense.png" alt="Dense Matrix Storm">
+    <div class="figure-caption">Figure 5: Live phosphor corruption with reverse-video highlight blocks and PETSCII glyphs.</div>
   </div>
 </div>
 

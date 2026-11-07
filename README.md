@@ -61,34 +61,23 @@ RUN
 ### 1. Authentic Educator 64 Boot Sequence
 The custom 901246-01 KERNAL boots directly into the PET-style monochrome screen with the distinctive `**** COMMODORE 4064  BASIC V2.0 ****` startup banner:
 
-![Initial Boot](docs/images/01_initial_boot.png)
+![Educator 64 Clean Boot](docs/images/01_clean_boot.png)
 
 ### 2. Interactive Terminal & Commodore BASIC V2.0
 Executing interactive BASIC commands with real 6502 cycle-accurate stepping, line tokenization, and keyboard buffer queuing:
 
-![BASIC Interactive Hello World](docs/images/02_basic_hello_world.png)
+![BASIC Interactive Hello World](docs/images/02_clean_basic_hello_world.png)
 
-### 3. Screen Memory & Border Alignment
-Fine-tuning the 40x25 terminal frame buffer, VIC-II raster line synchronization, and CP437/Unicode PETSCII screen code mapping:
+### 3. Full PETSCII Graphic Character Synthesis
+Rendering native 6502 loops drawing Commodore PET graphic character sets with accurate 40x25 terminal frame buffer borders:
 
-![Border Alignment & Screen Render](docs/images/03_border_fix.png)
-![Border Alignment Detail](docs/images/04_border_detail.png)
+![PETSCII Graphics](docs/images/03_clean_petscii_render.png)
 
-### 4. Full PETSCII Graphic Character Synthesis
-Rendering native 6502 loops drawing Commodore PET graphic character sets:
+### 4. Matrix Digital Rain in Real-Time (POC Level 1)
+Direct screen RAM manipulation (`$0400–$07E7`) executing live in-place CRT refresh at 35 FPS, unlocking reverse-video blocks (`█`, `▒`), card suits (`♠`, `♣`), and alien PETSCII runes:
 
-![PETSCII Graphics](docs/images/05_petscii_render.png)
-
-### 5. Matrix Digital Rain in Real-Time
-Direct screen RAM manipulation (`$0400–$07E7`) executing live in-place CRT refresh:
-
-![Matrix Rain Effect](docs/images/06_matrix_rain.png)
-
-### 6. Live Glitch Storm: Full PETSCII & Glowing Blocks (POC Level 1)
-Executing the updated 1-liner (`10 POKE 1024+RND(1)*1000, RND(1)*256: GOTO 10`) unlocking full 256-code glyphs, reverse-video blocks, and symbols:
-
-![Matrix Run Start](docs/images/08_matrix_run_start.png)
-![Matrix Dense PETSCII](docs/images/09_matrix_dense_petscii.jpg)
+![Matrix Digital Rain Start](docs/images/04_clean_matrix_start.png)
+![Matrix Dense PETSCII Glitch Storm](docs/images/05_clean_matrix_dense.png)
 
 ---
 
