@@ -1,19 +1,30 @@
 # Commodore 4064 (Educator 64 / PET 64) Standalone Rebuild
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Platform: Windows x64](https://img.shields.io/badge/Platform-Windows%20x64-blue.svg)](releases/)
+[![Build & Test](https://github.com/ScientificBrad/cbm4064-rebuild/actions/workflows/build.yml/badge.svg)](https://github.com/ScientificBrad/cbm4064-rebuild/actions/workflows/build.yml)
 [![ROM Checksum: Verified](https://img.shields.io/badge/ROM%20CRC32-789C8CC5-brightgreen.svg)](roms/checksums.sha256)
 [![Target: 901246--01](https://img.shields.io/badge/KERNAL-901246--01-yellow.svg)](roms/)
 
-> **A complete bit-for-bit reverse engineering, disassembly, and standalone native execution harness for the ultra-rare Commodore 4064 (Educator 64 / PET 64) KERNAL ROM (Part # 901246-01).**
+> **A complete bit-for-bit reverse engineering, independent 6502 assembly, and standalone native execution harness for the ultra-rare Commodore 4064 (Educator 64 / PET 64) KERNAL ROM (Part # 901246-01).**
 
 ---
 
-## ⚡ Quick Start: Proof of Concept
+## 📖 1. Historical Background
 
-You can run the Educator 64 environment directly on modern Windows without installing any dependencies or emulators.
+In 1983, Commodore produced the **Educator 64** (model **4064**, also designated **PET 64**) specifically for the American K-12 educational market to compete against the Apple IIe. 
 
-1. Download or clone this repository:
+School districts reported that computer lab hardware was frequently vandalized or stolen—particularly external color monitors, power bricks, and 9-pin video cables. Commodore addressed this by mounting standard Commodore 64 motherboards inside the rugged, heavy-gauge sheet metal casing of a Commodore PET 4000 series, pairing it with an internal 12-inch monochrome green phosphor CRT monitor and built-in power supply.
+
+Because the internal monitor only accepted monochrome composite luminance, standard C64 saturated colors caused severe smearing and brightness banding. Commodore engineers developed a specialized 8 KB KERNAL ROM (`901246-01`) mapped at `$E000–$FFFF` with dedicated monochrome color handling, custom startup banners, and altered boot sequence vectors.
+
+---
+
+## ⚡ 2. Quick Start: Proof of Concept
+
+You can run the Educator 64 environment directly on Windows without installing any dependencies or emulators.
+
+1. Clone this repository:
    ```bash
    git clone https://github.com/ScientificBrad/cbm4064-rebuild.git
    cd cbm4064-rebuild
@@ -26,9 +37,9 @@ You can run the Educator 64 environment directly on modern Windows without insta
 
 ---
 
-## 🟢 The Proof of Concept: Run the 3 Matrix Commands!
+## 🟢 3. The Proof of Concept: Run the 3 Matrix Commands!
 
-Once the authentic Educator 64 green-screen boots to the `READY.` prompt, run these **3 Matrix Digital Rain programs** to push the 1983 KERNAL ROM and memory bus to its limits:
+Once the authentic Educator 64 green-screen boots to the `READY.` prompt, run these **3 Matrix Digital Rain programs** to demonstrate real-time direct screen memory manipulation (`$0400–$07E7`):
 
 ### Level 1: 1-Line Turbo Glitch (Full PETSCII & Glowing Blocks)
 > *Unlocks the full 256-character PETSCII set including inverse-video glowing green blocks, card suits, and alien runes:*
@@ -38,7 +49,7 @@ RUN
 ```
 
 ### Level 2: 1-Line Cascading Rain (Real Vertical Streams)
-> *Instead of random static, this picks columns and drops real vertical digital streams from top to bottom:*
+> *Picks random columns across the 40-column screen and streams glyphs downward row by row from top to bottom:*
 ```basic
 10 C=RND(1)*40: FOR Y=0 TO 24: POKE 1024+Y*40+C, RND(1)*256: NEXT: GOTO 10
 RUN
@@ -56,7 +67,7 @@ RUN
 
 ---
 
-## 📸 Workflow & Development Gallery
+## 📸 4. Workflow & Development Gallery
 
 ### 1. Authentic Educator 64 Boot Sequence
 The custom 901246-01 KERNAL boots directly into the PET-style monochrome screen with the distinctive `**** COMMODORE 4064  BASIC V2.0 ****` startup banner:
@@ -64,12 +75,12 @@ The custom 901246-01 KERNAL boots directly into the PET-style monochrome screen 
 ![Educator 64 Interactive Boot](docs/images/01_interactive_boot.png)
 
 ### 2. Interactive Terminal & Commodore BASIC V2.0
-Executing interactive BASIC commands with real 6502 cycle-accurate stepping, line tokenization, and keyboard buffer queuing:
+Executing interactive BASIC commands with real 6502 cycle-approximate stepping, line tokenization, and keyboard buffer queuing:
 
 ![BASIC Interactive Hello World](docs/images/02_basic_hello_world.png)
 
 ### 3. Screen RAM Manipulation & Real-Time Dynamic Refresh
-Direct screen memory poke (`$0400–$07E7`) with cycle-accurate VIC-II raster line synchronization:
+Direct screen memory poke (`$0400–$07E7`) with cycle-approximate VIC-II raster line synchronization:
 
 ![Screen RAM Matrix Poke](docs/images/03_matrix_screen_ram.png)
 
@@ -81,21 +92,17 @@ Direct screen RAM manipulation executing live in-place CRT refresh at 35 FPS, un
 
 ---
 
-## 🔬 Reverse Engineering & ROM Analysis
-
-The Commodore 4064 (also marketed as the **Educator 64** or **PET 64**) was built by Commodore in 1983 specifically for classroom environments. It paired standard C64 motherboards with an internal monochrome green monitor mounted inside a rugged PET style casing.
-
-To prevent color-fringing and artifacting on the monochrome CRT, Commodore engineers created a dedicated 8 KB KERNAL ROM (`901246-01`) mapped at `$E000–$FFFF`.
+## 🔬 5. Reverse Engineering & ROM Analysis
 
 ### Cryptographic Verification
 
 | Artifact | Size | CRC-32 | SHA-256 |
 | :--- | :--- | :--- | :--- |
 | **Original KERNAL** | 8,192 B | `789C8CC5` | `b2b430a134514af11f3ed64c0929fc5241d8436ba7b12514ec02d1b2cb2fd533` |
-| **Rebuilt KERNAL** | 8,192 B | `789C8CC5` | `b2b430a134514af11f3ed64c0929fc5241d8436ba7b12514ec02d1b2cb2fd533` |
+| **Reassembled ROM** | 8,192 B | `789C8CC5` | `b2b430a134514af11f3ed64c0929fc5241d8436ba7b12514ec02d1b2cb2fd533` |
 | **BASIC V2.0 ROM** | 8,192 B | `C30C7B90` | `89878cea0a268734696de11c4bae593eaaa506465d2029d619c0e0cbccdfa62d` |
 
-### Key ROM Quirks Discovered
+### Key ROM Modifications Discovered
 
 1. **VIC-II Color Lock (`$E4C8`, `$E4DA`)**:
    Standard C64 KERNAL initializes multicolored borders and backgrounds. The 4064 KERNAL intercepts the timer IRQ and resets all 15 VIC-II color registers (`$D020–$D02E`) to zero (`0x00` - Black) if bit 7 of text color register `$0286` is not set, enforcing clean monochrome output.
@@ -106,62 +113,114 @@ To prevent color-fringing and artifacting on the monochrome CRT, Commodore engin
 4. **PAL/NTSC Raster Synchronization (`$FF5B`)**:
    Measures scanline timing at `$D012` to distinguish between 50 Hz PAL (312 lines) and 60 Hz NTSC (263 lines) video clocks.
 
+Full technical details and disassembled routines are documented in [docs/REVERSE_ENGINEERING.md](docs/REVERSE_ENGINEERING.md).
+
 ---
 
-## 🛠️ Repository Layout
+## 🏗️ 6. Rebuilding the ROM from Assembly
 
+The repository includes a dedicated build tool `asm/build_rom.py` supporting two distinct assembly pipelines:
+
+### Method 1: Independent 6502 Mnemonic Assembly (Default)
+Parses the 4,113-line assembly source (`asm/cbm4064_kernal.asm`), decodes instructions and addressing modes, calculates relative branch offsets, and encodes machine code without reading comment bytes:
+```bash
+python asm/build_rom.py --method assemble
 ```
+
+### Method 2: Disassembly Byte Extraction (Reference Mode)
+Extracts the raw opcode bytes recorded in the disassembly comments for byte-for-byte verification:
+```bash
+python asm/build_rom.py --method extract
+```
+
+Expected output:
+```text
+Reconstructed size: 8192 bytes
+Reconstructed CRC-32:  789C8CC5
+Reconstructed SHA-256: b2b430a134514af11f3ed64c0929fc5241d8436ba7b12514ec02d1b2cb2fd533
+[SUCCESS] Rebuilt ROM is bit-for-bit IDENTICAL to original ROM! (0 differing bytes)
+```
+
+---
+
+## 🧪 7. Automated Test Suite
+
+The project includes 24 automated unit and integration tests built with xUnit:
+
+```bash
+dotnet test tests/Commodore4064.Tests/Commodore4064.Tests.csproj --verbosity normal
+```
+
+Test coverage includes:
+- **CPU Instruction Decoders**: Immediate, Zero Page, Absolute, Indexed, ADC/SBC carry & overflow flags, JMP, JSR/RTS, Branching, and Stack push/pull operations.
+- **Memory Bus Architecture**: 64 KB RAM read/writes, Screen memory mapping (`$0400–$07E7`), Color RAM, ROM mapping (`$E000–$FFFF`), and scanline progression.
+- **Boot Sequence & Banner**: Cold boot execution, reset vector dispatch (`$FCE2`), Educator 64 banner check, and prompt loop.
+- **BASIC V2.0 Interpreter**: Interactive `PRINT "HELLO WORLD"`, floating-point arithmetic (`PRINT 2+2`), multi-line `FOR/NEXT` loops, and direct `POKE` updates.
+
+See [docs/TESTING.md](docs/TESTING.md) for full testing documentation.
+
+---
+
+## 🏛️ 8. Emulator Architecture & Fidelity Scope
+
+- **Architecture**: Documented in detail in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+- **CPU Execution**: NMOS 6502/6510 instruction decoder with support for all 13 addressing modes and decimal arithmetic.
+- **Memory Banking**: 6510 processor port (`$0000–$0001`) managing LORAM, HIRAM, and CHAREN memory switching.
+- **Display Core**: In-place console CRT rendering at 35 FPS with complete PETSCII-to-Unicode character translation.
+- **Scope & Limitations**:
+  - The emulator is **cycle-approximate**; it is designed to run the KERNAL, BASIC V2.0, and standard screen memory programs.
+  - Complex cycle-exact VIC-II raster multiplexing, sprite collision hardware, and SID audio synthesis are outside the current architectural scope.
+
+---
+
+## 📁 9. Repository Layout
+
+```text
 cbm4064-rebuild/
-├── Commodore_4064_Decompilation_Report.pdf  # Comprehensive technical PDF whitepaper
-├── README.md                                # Project documentation & quick start
-├── releases/
-│   └── Commodore4064.exe                    # Standalone self-contained Windows x64 binary
+├── .github/
+│   └── workflows/
+│       └── build.yml                        # Automated CI build, test & packaging
+├── asm/
+│   ├── cbm4064_kernal.asm                   # 4,113 lines of documented 6502 assembly
+│   └── build_rom.py                         # Independent assembler & verification tool
+├── src/
+│   └── Commodore4064/                       # C# .NET 8 Standalone Emulator Core
+│       ├── Cpu6502.cs                       # NMOS 6502/6510 CPU engine
+│       ├── CbmBus.cs                        # Memory banking, VIC-II, CIA1, PETSCII bus
+│       ├── Program.cs                       # 35 FPS live terminal CRT renderer
+│       └── Commodore4064.csproj             # .NET 8 project configuration
+├── tests/
+│   └── Commodore4064.Tests/                 # Automated xUnit test suite (24 tests)
+├── docs/
+│   ├── ARCHITECTURE.md                      # System architecture and design
+│   ├── BUILDING.md                          # Build and packaging instructions
+│   ├── TESTING.md                           # Automated test suite documentation
+│   ├── REVERSE_ENGINEERING.md               # In-depth KERNAL disassembly analysis
+│   └── images/                              # Verified workflow screenshots
 ├── roms/
 │   ├── cbm4064_kernal_901246-01.rom         # Authentic Commodore 4064 KERNAL ROM
 │   ├── cbm4064_rebuilt.rom                  # Bit-for-bit rebuilt ROM
 │   ├── basic.901226-01.bin                  # Commodore BASIC V2.0 ROM
 │   └── checksums.sha256                     # Cryptographic verification hashes
-├── asm/
-│   ├── cbm4064_kernal.asm                   # 4,113 lines of documented 6502 assembly
-│   └── build_rom.py                         # Reassembly verification script
-├── src/
-│   └── Commodore4064/                       # C# .NET 8 Standalone Emulator Core
-│       ├── Cpu6502.cs                       # NMOS 6502/6510 CPU emulation engine
-│       ├── CbmBus.cs                        # Memory banking, VIC-II, CIA1, PETSCII bus
-│       ├── Program.cs                       # 35 FPS live terminal CRT renderer
-│       └── Commodore4064.csproj             # .NET 8 project configuration
-└── docs/
-    ├── report.html                          # Source HTML report template
-    ├── REVERSE_ENGINEERING.md               # Function-by-function technical analysis
-    └── images/                              # Workflow and session captures
+├── releases/
+│   └── Commodore4064.exe                    # Self-contained Windows x64 binary (~35 MB)
+├── Commodore_4064_Decompilation_Report.pdf  # Comprehensive technical PDF whitepaper
+├── CHANGELOG.md                             # Release changelog (v1.0.0)
+├── LICENSE                                  # MIT License (source & tooling)
+├── THIRD_PARTY_NOTICES.md                   # Firmware provenance & IP statement
+└── README.md                                # Project documentation
 ```
 
 ---
 
-## 🏗️ Rebuilding the ROM from Assembly
+## ⚖️ 10. Licensing & Legal Statement
 
-To assemble the 4,113-line disassembled source back into the bit-for-bit identical binary:
-
-```bash
-python asm/build_rom.py
-```
-
-Expected output:
-```
-[MATCH] Rebuilt ROM is bit-for-bit IDENTICAL to original!
-CRC32:  789C8CC5
-SHA256: b2b430a134514af11f3ed64c0929fc5241d8436ba7b12514ec02d1b2cb2fd533
-```
+- **Project Source Code & Tooling**: Licensed under the [MIT License](LICENSE).
+- **Historical Firmware**: Historical Commodore ROM binaries and trademarks are the property of their respective holders and are analyzed here strictly under educational preservation and reverse-engineering interoperability provisions (17 U.S.C. § 1201(f) and EU Directive 2009/24/EC).
+- See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for full details on firmware provenance, trademarks, and ROM-free distribution.
 
 ---
 
-## 📄 Complete PDF Report
-
-A complete technical whitepaper with embedded workflow captures, disassembly listings, and hardware architecture analysis is included in the root directory:
-👉 **[`Commodore_4064_Decompilation_Report.pdf`](Commodore_4064_Decompilation_Report.pdf)**
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License. Commodore, Educator 64, PET, and C64 are trademarks of their respective historical holders and are referenced here solely for educational and preservation purposes.
+## 👥 11. Credits & Acknowledgments
+- **Reverse Engineering & Disassembly**: Conducted using Ghidra 12.1.4 and the Reverse Engineer Anything (REA) environment.
+- **Hardware Research**: Dedicated to the preservation of Commodore's unique 1980s educational computing history.
