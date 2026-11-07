@@ -42,7 +42,7 @@ jobs:
         run: dotnet test tests/Commodore4064.Tests/Commodore4064.Tests.csproj -c Release --verbosity normal
 
       - name: Verify ROM Reconstruction (Independent 6502 Assembly)
-        run: python asm/build_rom.py --method assemble
+        run: python asm/build_rom.py --method assemble --report reports/rom_verification_report.md
 
       - name: Verify ROM Reconstruction (Disassembly Extraction Reference)
         run: python asm/build_rom.py --method extract
@@ -63,11 +63,11 @@ jobs:
           path: publish/win-x64/Commodore4064.exe
           if-no-files-found: error
 
-      - name: Upload Verified ROM Artifacts
+      - name: Upload ROM Verification Report & Checksums
         uses: actions/upload-artifact@v4
         with:
-          name: verified-cbm4064-roms
+          name: rom-verification-and-checksums
           path: |
-            roms/cbm4064_rebuilt.rom
+            reports/rom_verification_report.md
             roms/checksums.sha256
           if-no-files-found: error

@@ -18,6 +18,7 @@ import hashlib
 import os
 import re
 import sys
+import time
 
 EXPECTED_SIZE = 8192
 EXPECTED_CRC32 = 0x789C8CC5
@@ -290,6 +291,11 @@ def parse_args():
         help="Path to original ROM binary for bit-for-bit comparison (optional)"
     )
     parser.add_argument(
+        "--report",
+        default=None,
+        help="Path to write a Markdown verification report file (optional)"
+    )
+    parser.add_argument(
         "--method", "-m",
         choices=["assemble", "extract"],
         default="assemble",
@@ -357,6 +363,25 @@ def main():
             sys.exit(1)
     else:
         print("\n[SUCCESS] Checksum verification passed against Commodore 901246-01 reference.")
+
+    if args.report:
+        report_dir = os.path.dirname(os.path.abspath(args.report))
+        if report_dir and not os.path.exists(report_dir):
+            os.makedirs(report_dir, exist_ok=True)
+        with open(args.report, "w", encoding="utf-8") as rf:
+            rf.write("# Commodore 4064 KERNAL ROM Verification Report\n\n")
+            rf.write(f"- **Part Number**: 901246-01\n")
+            method_desc = "Independent 6502 Mnemonic Assembly" if args.method == "assemble" else "Listing Byte Extraction"
+            rf.write(f"- **Reconstruction Method**: {args.method} ({method_desc})\n")
+            rf.write(f"- **Size**: {len(rebuilt_bytes)} bytes (Expected: {EXPECTED_SIZE})\n")
+            rf.write(f"- **CRC-32**: `{rebuilt_crc32:08X}` (Expected: `{EXPECTED_CRC32:08X}`)\n")
+            rf.write(f"- **SHA-256**: `{rebuilt_sha256}`\n")
+            rf.write(f"- **Expected SHA-256**: `{EXPECTED_SHA256}`\n")
+            rf.write(f"- **Cryptographic Integrity**: VERIFIED\n")
+            if args.original and os.path.isfile(args.original):
+                rf.write("- **Bit-for-Bit Identity with Original**: IDENTICAL (0 differing bytes)\n")
+            rf.write(f"- **Generated At**: {time.strftime('%Y-%m-%d %H:%M:%SZ', time.gmtime())}\n")
+        print(f"Wrote verification report to: {args.report}")
 
     sys.exit(0)
 

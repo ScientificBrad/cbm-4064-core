@@ -1,4 +1,4 @@
-# Commodore 4064 (Educator 64 / PET 64) Standalone Rebuild
+# Commodore 4064 | KERNAL Reverse Engineering & Emulation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Platform: Windows x64](https://img.shields.io/badge/Platform-Windows%20x64-blue.svg)](releases/)
