@@ -11,6 +11,11 @@
 .idea/
 .vscode/
 
+# Python caches & build artifacts
+__pycache__/
+*.pyc
+roms/*_assembled.rom
+
 # Exception: Keep releases directory with standalone executable
 !releases/
 !releases/**
