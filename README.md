@@ -61,23 +61,23 @@ RUN
 ### 1. Authentic Educator 64 Boot Sequence
 The custom 901246-01 KERNAL boots directly into the PET-style monochrome screen with the distinctive `**** COMMODORE 4064  BASIC V2.0 ****` startup banner:
 
-![Educator 64 Clean Boot](docs/images/01_clean_boot.png)
+![Educator 64 Interactive Boot](docs/images/01_interactive_boot.png)
 
 ### 2. Interactive Terminal & Commodore BASIC V2.0
 Executing interactive BASIC commands with real 6502 cycle-accurate stepping, line tokenization, and keyboard buffer queuing:
 
-![BASIC Interactive Hello World](docs/images/02_clean_basic_hello_world.png)
+![BASIC Interactive Hello World](docs/images/02_basic_hello_world.png)
 
-### 3. Full PETSCII Graphic Character Synthesis
-Rendering native 6502 loops drawing Commodore PET graphic character sets with accurate 40x25 terminal frame buffer borders:
+### 3. Screen RAM Manipulation & Real-Time Dynamic Refresh
+Direct screen memory poke (`$0400–$07E7`) with cycle-accurate VIC-II raster line synchronization:
 
-![PETSCII Graphics](docs/images/03_clean_petscii_render.png)
+![Screen RAM Matrix Poke](docs/images/03_matrix_screen_ram.png)
 
 ### 4. Matrix Digital Rain in Real-Time (POC Level 1)
-Direct screen RAM manipulation (`$0400–$07E7`) executing live in-place CRT refresh at 35 FPS, unlocking reverse-video blocks (`█`, `▒`), card suits (`♠`, `♣`), and alien PETSCII runes:
+Direct screen RAM manipulation executing live in-place CRT refresh at 35 FPS, unlocking reverse-video blocks (`█`, `▒`), card suits (`♠`, `♣`), and alien PETSCII runes:
 
-![Matrix Digital Rain Start](docs/images/04_clean_matrix_start.png)
-![Matrix Dense PETSCII Glitch Storm](docs/images/05_clean_matrix_dense.png)
+![Matrix Digital Rain Start](docs/images/04_matrix_rain_start.png)
+![Matrix Dense PETSCII Glitch Storm](docs/images/05_matrix_rain_dense.jpg)
 
 ---
 
