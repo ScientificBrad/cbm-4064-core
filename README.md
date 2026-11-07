@@ -15,7 +15,7 @@ You can run the Educator 64 environment directly on modern Windows without insta
 
 1. Download or clone this repository:
    ```bash
-   git clone https://github.com/bjstudiosgit/cbm4064-rebuild.git
+   git clone https://github.com/ScientificBrad/cbm4064-rebuild.git
    cd cbm4064-rebuild
    ```
 2. Launch the standalone single-file binary:
