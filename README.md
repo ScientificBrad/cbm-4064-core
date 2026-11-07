@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Platform: Windows x64](https://img.shields.io/badge/Platform-Windows%20x64-blue.svg)](releases/)
-[![Build & Test](https://github.com/ScientificBrad/cbm4064-rebuild/actions/workflows/build.yml/badge.svg)](https://github.com/ScientificBrad/cbm4064-rebuild/actions/workflows/build.yml)
+[![Build & Test](https://github.com/ScientificBrad/cbm-4064-core/actions/workflows/build.yml/badge.svg)](https://github.com/ScientificBrad/cbm-4064-core/actions/workflows/build.yml)
 [![ROM Checksum: Verified](https://img.shields.io/badge/ROM%20CRC32-789C8CC5-brightgreen.svg)](roms/checksums.sha256)
 [![Target: 901246--01](https://img.shields.io/badge/KERNAL-901246--01-yellow.svg)](roms/)
 
@@ -26,8 +26,8 @@ You can run the Educator 64 environment directly on Windows without installing a
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/ScientificBrad/cbm4064-rebuild.git
-   cd cbm4064-rebuild
+   git clone https://github.com/ScientificBrad/cbm-4064-core.git
+   cd cbm-4064-core
    ```
 2. Launch the standalone single-file binary:
    ```powershell
@@ -176,7 +176,7 @@ See [docs/TESTING.md](docs/TESTING.md) for full testing documentation.
 ## 📁 9. Repository Layout
 
 ```text
-cbm4064-rebuild/
+cbm-4064-core/
 ├── .github/
 │   └── workflows/
 │       └── build.yml                        # Automated CI build, test & packaging

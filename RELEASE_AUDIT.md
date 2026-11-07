@@ -4,7 +4,7 @@
 **Target Hardware**: 1983 Educator 64 (Commodore 64 motherboard with internal 12" green monochrome CRT)  
 **Target Firmware**: KERNAL ROM Part # `901246-01` (8,192 bytes, mapped at `$E000–$FFFF`)  
 **Workspace Path**: `D:\Emulation\C64`  
-**GitHub Repository**: `ScientificBrad/cbm4064-rebuild`  
+**GitHub Repository**: `ScientificBrad/cbm-4064-core`  
 **Working Branch**: `improvement/v1-release-preparation`  
 **Audit Date**: 2026-11-07  
 **Auditor**: Antigravity Assistant & ScientificBrad  
@@ -133,7 +133,7 @@ CPU State: PC=$A480, A=$00, X=$00, Y=$0A, SP=$FB, Status=32
 
 ## 7. GitHub Status
 
-- **Repository**: `https://github.com/ScientificBrad/cbm4064-rebuild`
+- **Repository**: `https://github.com/ScientificBrad/cbm-4064-core`
 - **Main Branch State**: Up-to-date with working baseline.
 - **Working Branch**: `improvement/v1-release-preparation`
 - **Commits on Working Branch**:
