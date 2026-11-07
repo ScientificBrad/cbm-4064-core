@@ -84,6 +84,12 @@ Direct screen RAM manipulation (`$0400–$07E7`) executing live in-place CRT ref
 
 ![Matrix Rain Effect](docs/images/06_matrix_rain.png)
 
+### 6. Live Glitch Storm: Full PETSCII & Glowing Blocks (POC Level 1)
+Executing the updated 1-liner (`10 POKE 1024+RND(1)*1000, RND(1)*256: GOTO 10`) unlocking full 256-code glyphs, reverse-video blocks, and symbols:
+
+![Matrix Run Start](docs/images/08_matrix_run_start.png)
+![Matrix Dense PETSCII](docs/images/09_matrix_dense_petscii.jpg)
+
 ---
 
 ## 🔬 Reverse Engineering & ROM Analysis
